@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Calc</string>
+    <string name="but_w1">75sp</string>
+    <string name="but_w2">150sp</string>
+    <string name="but_h1">60sp</string>
+    <string name="but_h2">120sp</string>
+
+</resources>
+

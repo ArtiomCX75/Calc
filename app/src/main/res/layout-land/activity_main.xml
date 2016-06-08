@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|bottom"
+                android:textSize="@dimen/abc_text_size_large_material"
+                android:background="@color/button_material_light"
+                android:id="@+id/result_field" />
+
+            <TextView
+                android:padding="10dp"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:gravity="right|bottom"
+                android:textSize="@dimen/abc_text_size_large_material"
+                android:layout_height="wrap_content"
+                android:background="@color/button_material_light"
+                android:id="@+id/enter_field" />
+
+        </LinearLayout>
+
+        <GridLayout
+            android:padding="10dp"
+            android:layout_gravity="bottom"
+            android:gravity="bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="5"
+            android:minWidth="@dimen/activity_horizontal_margin"
+            android:minHeight="@dimen/activity_vertical_margin"
+            >
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="0"
+                android:layout_row="0"
+                android:text="MC"
+                android:id="@+id/num_mc" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="1"
+                android:layout_row="0"
+                android:text="MR"
+                android:id="@+id/num_mr" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="2"
+                android:layout_row="0"
+                android:text="MS"
+                android:id="@+id/num_ms" />
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="3"
+                android:layout_row="0"
+                android:text="M+"
+                android:id="@+id/num_mplus" />
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="4"
+                android:layout_row="0"
+                android:text="M-"
+                android:id="@+id/num_mmin" />
+
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="0"
+                android:layout_row="1"
+                android:text="---"
+                android:id="@+id/num_back" />
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="1"
+                android:layout_row="1"
+                android:text="CE"
+                android:id="@+id/num_ce" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="2"
+                android:layout_row="1"
+                android:text="C"
+                android:id="@+id/num_c" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="3"
+                android:layout_row="1"
+                android:text="+/-"
+                android:id="@+id/num_sign" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="4"
+                android:layout_row="1"
+                android:text="roo"
+                android:id="@+id/num_root" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="0"
+                android:layout_row="2"
+                android:text="7"
+                android:id="@+id/num_7" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="1"
+                android:layout_row="2"
+                android:text="8"
+                android:id="@+id/num_8" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="2"
+                android:layout_row="2"
+                android:text="9"
+                android:id="@+id/num_9" />
+
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="3"
+                android:layout_row="2"
+                android:text="/"
+                android:id="@+id/num_div" />
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="4"
+                android:layout_row="2"
+                android:text="%"
+                android:id="@+id/num_proc" />
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="0"
+                android:layout_row="3"
+                android:text="4"
+                android:id="@+id/num_4" />
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="1"
+                android:layout_row="3"
+                android:text="5"
+                android:id="@+id/num_5" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="2"
+                android:layout_row="3"
+                android:text="6"
+                android:id="@+id/num_6" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="3"
+                android:layout_row="3"
+                android:text="*"
+                android:id="@+id/num_mult" />
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="0"
+                android:layout_row="4"
+                android:text="1"
+                android:id="@+id/num_1" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="1"
+                android:layout_row="4"
+                android:text="2"
+                android:id="@+id/num_2" />
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="2"
+                android:layout_row="4"
+                android:text="3"
+                android:id="@+id/num_3" />
+
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="3"
+                android:layout_row="4"
+                android:text="-"
+                android:id="@+id/num_min" />
+
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="4"
+                android:layout_row="4"
+                android:text="="
+                android:layout_rowSpan="2"
+                android:layout_gravity="fill_vertical"
+                android:id="@+id/num_eq" />
+
+
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="0"
+                android:layout_row="5"
+                android:text="0"
+                android:elevation="0dp"
+                android:layout_gravity="fill_horizontal"
+                android:layout_columnSpan="2"
+                android:id="@+id/num_0" />
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="2"
+                android:layout_row="5"
+                android:text=","
+                android:id="@+id/num_dot" />
+
+
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="3"
+                android:layout_row="5"
+                android:text="+"
+                android:id="@+id/num_plus" />
+
+            <TextView
+                style="@style/Button1_Style"
+                android:layout_column="4"
+                android:layout_row="3"
+                android:text="1/x"
+                android:id="@+id/num_1divx" />
+
+
+        </GridLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+</LinearLayout>
