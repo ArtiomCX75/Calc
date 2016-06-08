@@ -3,6 +3,7 @@ package com.faa1192.calc;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -14,6 +15,7 @@ public TextView resultField;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toSetOnClickListener();
+        toDisableButtons();
         enterField = (TextView) findViewById(R.id.enter_field);
         resultField = (TextView) findViewById(R.id.result_field);
     }
@@ -32,6 +34,7 @@ public TextView resultField;
             case R.id.num_mmin:
                 break;
             case R.id.num_back:
+                toBackSpace();
                 break;
             case R.id.num_ce:
                 enterField.setText("");
@@ -43,6 +46,7 @@ public TextView resultField;
                 trimZero();
                 break;
             case R.id.num_sign:
+                toChangeSign();
                 break;
             case R.id.num_root:
                 break;
@@ -132,6 +136,8 @@ public TextView resultField;
     }
 
     public void enterNumber(Integer num){
+        if(isSizeExceed())
+            return;
         enterField.setText(enterField.getText()+num.toString());
         trimZero();
     }
@@ -139,20 +145,86 @@ public TextView resultField;
     public void addDot(){
         if(!enterField.getText().toString().contains("."))
             enterField.setText(enterField.getText()+".");
+        trimZero();
     }
 
     public void trimZero(){
+        String sign = "";
         String s = enterField.getText().toString();
+        if(s.length()==0||s.equals("0")) {
+            enterField.setText("0");
+            return;
+        }
+
+        if(s.substring(0, 1).equals("-")){
+            sign="-";
+            s=s.substring(1);
+        }
+
         for(int i=0; i<s.length();i++) {
             if (s.substring(0, 1).equals("0")) {
                 s = s.substring(1);
             } else
                 break;
         }
-        if(s.length()==0)
-            s="0";
+        if(s.length()==0||s.equals("0")) {
+            s = "0";
+            sign="";
+        }
         if(s.substring(0, 1).equals("."))
             s="0"+s;
-        enterField.setText(s.toString());
+        enterField.setText(sign+s.toString());
+    }
+
+
+    public void toDisableButtons() {
+        ((Button) findViewById(R.id.num_mc)).setEnabled(false);
+        ((Button) findViewById(R.id.num_mr)).setEnabled(false);
+        ((Button) findViewById(R.id.num_ms)).setEnabled(false);
+        ((Button) findViewById(R.id.num_mplus)).setEnabled(false);
+        ((Button)  findViewById(R.id.num_mmin)).setEnabled(false);
+        ((Button)   findViewById(R.id.num_back)).setEnabled(true);
+        ((Button)    findViewById(R.id.num_ce)).setEnabled(true);
+        ((Button)    findViewById(R.id.num_c)).setEnabled(true);
+        ((Button)    findViewById(R.id.num_sign)).setEnabled(true);
+        ((Button)     findViewById(R.id.num_root)).setEnabled(false);
+        ((Button)     findViewById(R.id.num_7)).setEnabled(true);
+        ((Button)     findViewById(R.id.num_8)).setEnabled(true);
+        ((Button)     findViewById(R.id.num_9)).setEnabled(true);
+        ((Button)     findViewById(R.id.num_div)).setEnabled(false);
+        ((Button)     findViewById(R.id.num_proc)).setEnabled(false);
+        ((Button)     findViewById(R.id.num_4)).setEnabled(true);
+        ((Button)      findViewById(R.id.num_5)).setEnabled(true);
+        ((Button)      findViewById(R.id.num_6)).setEnabled(true);
+        ((Button)     findViewById(R.id.num_mult)).setEnabled(false);
+        ((Button)     findViewById(R.id.num_1divx)).setEnabled(false);
+        ((Button)     findViewById(R.id.num_1)).setEnabled(true);
+        ((Button)     findViewById(R.id.num_2)).setEnabled(true);
+        ((Button)     findViewById(R.id.num_3)).setEnabled(true);
+        ((Button)     findViewById(R.id.num_min)).setEnabled(false);
+        ((Button)     findViewById(R.id.num_eq)).setEnabled(false);
+        ((Button)     findViewById(R.id.num_0)).setEnabled(true);;
+        ((Button)     findViewById(R.id.num_dot)).setEnabled(true);
+        ((Button)     findViewById(R.id.num_plus)).setEnabled(false);
+    }
+
+    public boolean isSizeExceed(){
+        return enterField.getText().toString().length()>9?true:false;
+    }
+
+    public void toBackSpace(){
+        String s = enterField.getText().toString();
+        if(s.length()>0)
+            enterField.setText(s.substring(0, s.length()-1));
+        trimZero();
+    }
+
+    public void toChangeSign(){
+        String s = enterField.getText().toString();
+        if(s.substring(0, 1).equals("-"))
+            enterField.setText(s.substring(1));
+        else
+            enterField.setText("-"+s);
+        trimZero();
     }
 }

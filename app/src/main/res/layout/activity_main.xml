@@ -21,28 +21,30 @@
         >
 
         <TextView
-            android:padding="10dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right|bottom"
             android:textSize="@dimen/abc_text_size_large_material"
             android:background="@color/button_material_light"
-            android:id="@+id/result_field" />
+            android:id="@+id/result_field"
+            android:layout_margin="5dp"
+            android:padding="5dp" />
 
         <TextView
-            android:padding="10dp"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:gravity="right|bottom"
+
+            android:gravity="top|left"
             android:textSize="@dimen/abc_text_size_large_material"
             android:layout_height="wrap_content"
-            android:background="@color/button_material_light"
+            android:background="@color/accent_material_dark"
             android:id="@+id/enter_field"
-            android:text="0" />
+            android:text="0"
+            android:layout_margin="5dp"
+            android:padding="5dp" />
 
         <GridLayout
-            android:padding="10dp"
             android:layout_gravity="bottom"
             android:gravity="bottom"
             android:layout_width="wrap_content"
@@ -50,24 +52,24 @@
             android:columnCount="5"
             android:minWidth="@dimen/activity_horizontal_margin"
             android:minHeight="@dimen/activity_vertical_margin"
-            >
+            android:layout_margin="5dp">
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="0"
                 android:layout_row="0"
                 android:text="MC"
                 android:id="@+id/num_mc" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="1"
                 android:layout_row="0"
                 android:text="MR"
                 android:id="@+id/num_mr" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="2"
                 android:layout_row="0"
@@ -75,7 +77,7 @@
                 android:id="@+id/num_ms" />
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="3"
                 android:layout_row="0"
@@ -83,7 +85,7 @@
                 android:id="@+id/num_mplus" />
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="4"
                 android:layout_row="0"
@@ -92,57 +94,57 @@
 
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="0"
                 android:layout_row="1"
-                android:text="---"
+                android:text="←"
                 android:id="@+id/num_back" />
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="1"
                 android:layout_row="1"
                 android:text="CE"
                 android:id="@+id/num_ce" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="2"
                 android:layout_row="1"
                 android:text="C"
                 android:id="@+id/num_c" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="3"
                 android:layout_row="1"
                 android:text="+/-"
                 android:id="@+id/num_sign" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="4"
                 android:layout_row="1"
                 android:text="roo"
                 android:id="@+id/num_root" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="0"
                 android:layout_row="2"
                 android:text="7"
                 android:id="@+id/num_7" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="1"
                 android:layout_row="2"
                 android:text="8"
                 android:id="@+id/num_8" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="2"
                 android:layout_row="2"
@@ -151,7 +153,7 @@
 
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="3"
                 android:layout_row="2"
@@ -159,7 +161,7 @@
                 android:id="@+id/num_div" />
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="4"
                 android:layout_row="2"
@@ -167,7 +169,7 @@
                 android:id="@+id/num_proc" />
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="0"
                 android:layout_row="3"
@@ -175,21 +177,21 @@
                 android:id="@+id/num_4" />
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="1"
                 android:layout_row="3"
                 android:text="5"
                 android:id="@+id/num_5" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="2"
                 android:layout_row="3"
                 android:text="6"
                 android:id="@+id/num_6" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="3"
                 android:layout_row="3"
@@ -197,14 +199,14 @@
                 android:id="@+id/num_mult" />
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="0"
                 android:layout_row="4"
                 android:text="1"
                 android:id="@+id/num_1" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="1"
                 android:layout_row="4"
@@ -212,7 +214,7 @@
                 android:id="@+id/num_2" />
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="2"
                 android:layout_row="4"
@@ -221,7 +223,7 @@
 
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="3"
                 android:layout_row="4"
@@ -230,7 +232,7 @@
 
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="4"
                 android:layout_row="4"
@@ -242,7 +244,7 @@
 
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="0"
                 android:layout_row="5"
@@ -253,7 +255,7 @@
                 android:id="@+id/num_0" />
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="2"
                 android:layout_row="5"
@@ -262,14 +264,14 @@
 
 
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="3"
                 android:layout_row="5"
                 android:text="+"
                 android:id="@+id/num_plus" />
 
-            <TextView
+            <Button
                 style="@style/Button1_Style"
                 android:layout_column="4"
                 android:layout_row="3"
