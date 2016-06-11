@@ -6,9 +6,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static com.faa1192.calc.Calc.enterField;
+import static com.faa1192.calc.Calc.resultField;
+
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-public TextView enterField;
-public TextView resultField;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,66 +37,63 @@ public TextView resultField;
             case R.id.num_mmin:
                 break;
             case R.id.num_back:
-                toBackSpace();
+                Calc.toBackSpace();
                 break;
             case R.id.num_ce:
-                enterField.setText("");
-                trimZero();
+                Calc.clearEntry();
                 break;
             case R.id.num_c:
-                enterField.setText("");
-                resultField.setText("");
-                trimZero();
+                Calc.clear();
                 break;
             case R.id.num_sign:
-                toChangeSign();
+                Calc.toChangeSign();
                 break;
             case R.id.num_root:
                 break;
             case R.id.num_7:
-                enterNumber(7);
+                Calc.in(7);
                 break;
             case R.id.num_8:
-                enterNumber(8);
+                Calc.in(8);
                 break;
             case R.id.num_9:
-                enterNumber(9);
+                Calc.in(9);
                 break;
             case R.id.num_div:
                 break;
             case R.id.num_proc:
                 break;
             case R.id.num_4:
-                enterNumber(4);
+                Calc.in(4);
                 break;
             case R.id.num_5:
-                enterNumber(5);
+                Calc.in(5);
                 break;
             case R.id.num_6:
-                enterNumber(6);
+                Calc.in(6);
                 break;
             case R.id.num_mult:
                 break;
             case R.id.num_1divx:
                 break;
             case R.id.num_1:
-                enterNumber(1);
+                Calc.in(1);
                 break;
             case R.id.num_2:
-                enterNumber(2);
+                Calc.in(2);
                 break;
             case R.id.num_3:
-                enterNumber(3);
+                Calc.in(3);
                 break;
             case R.id.num_min:
                 break;
             case R.id.num_eq:
                 break;
             case R.id.num_0:
-                enterNumber(0);
+                Calc.in(0);
                 break;
             case R.id.num_dot:
-                addDot();
+                Calc.addDot();
                 break;
             case R.id.num_plus:
                 break;
@@ -135,46 +135,11 @@ public TextView resultField;
         findViewById(R.id.num_plus).setOnClickListener(this);
     }
 
-    public void enterNumber(Integer num){
-        if(isSizeExceed())
-            return;
-        enterField.setText(enterField.getText()+num.toString());
-        trimZero();
-    }
 
-    public void addDot(){
-        if(!enterField.getText().toString().contains("."))
-            enterField.setText(enterField.getText()+".");
-        trimZero();
-    }
 
-    public void trimZero(){
-        String sign = "";
-        String s = enterField.getText().toString();
-        if(s.length()==0||s.equals("0")) {
-            enterField.setText("0");
-            return;
-        }
 
-        if(s.substring(0, 1).equals("-")){
-            sign="-";
-            s=s.substring(1);
-        }
 
-        for(int i=0; i<s.length();i++) {
-            if (s.substring(0, 1).equals("0")) {
-                s = s.substring(1);
-            } else
-                break;
-        }
-        if(s.length()==0||s.equals("0")) {
-            s = "0";
-            sign="";
-        }
-        if(s.substring(0, 1).equals("."))
-            s="0"+s;
-        enterField.setText(sign+s.toString());
-    }
+
 
 
     public void toDisableButtons() {
@@ -208,23 +173,6 @@ public TextView resultField;
         ((Button)     findViewById(R.id.num_plus)).setEnabled(false);
     }
 
-    public boolean isSizeExceed(){
-        return enterField.getText().toString().length()>9?true:false;
-    }
 
-    public void toBackSpace(){
-        String s = enterField.getText().toString();
-        if(s.length()>0)
-            enterField.setText(s.substring(0, s.length()-1));
-        trimZero();
-    }
 
-    public void toChangeSign(){
-        String s = enterField.getText().toString();
-        if(s.substring(0, 1).equals("-"))
-            enterField.setText(s.substring(1));
-        else
-            enterField.setText("-"+s);
-        trimZero();
-    }
 }
