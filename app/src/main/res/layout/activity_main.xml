@@ -17,8 +17,7 @@
         android:layout_height="match_parent"
 
 
-
-        >
+        android:gravity="right">
 
         <TextView
             android:layout_weight="1"
@@ -28,14 +27,26 @@
             android:textSize="@dimen/abc_text_size_large_material"
             android:background="@color/button_material_light"
             android:id="@+id/result_field"
-            android:layout_margin="5dp"
+            android:layout_margin="1dp"
             android:padding="5dp" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right|bottom"
+            android:textSize="@dimen/abc_text_size_large_material"
+            android:background="@color/button_material_light"
+            android:id="@+id/sign_field"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:text=" " />
 
         <TextView
             android:layout_weight="1"
             android:layout_width="match_parent"
 
-            android:gravity="top|left"
+            android:gravity="right|bottom"
             android:textSize="@dimen/abc_text_size_large_material"
             android:layout_height="wrap_content"
             android:background="@color/accent_material_dark"

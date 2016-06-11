@@ -5,6 +5,8 @@ import android.widget.TextView;
 
 import java.math.BigDecimal;
 
+import static com.faa1192.calc.Calc.action.eq;
+
 /**
  * Created by faa11 on 11.06.2016.
  */
@@ -12,87 +14,64 @@ import java.math.BigDecimal;
 public class Calc {
     public static TextView enterField;
     public static TextView resultField;
+    public static TextView signField;
+
     private static boolean isDotPresent = false;
     private static boolean isDotNeed = false;
+    private static boolean isNeedClean = false;
+    private static boolean isInputClean = true;
 
-    //    private static boolean sign; //false = '-', true = '+'
+    private static Calc.action lastAct = null;
+
     private static BigDecimal curInput = new BigDecimal(0);
-static {
-    isDotNeed=false;
-    isDotPresent=false;
-    curInput = new BigDecimal(0);
-}
+    private static BigDecimal curResult = new BigDecimal(0);
+
+    enum action {
+        eq, plus, min, mult, dev, proc
+    }
+
+    enum functions {
+        mc, mr, ms, mplus, mmin, root, divx
+    }
+
+    static {
+        isDotNeed=false;
+        isDotPresent=false;
+        curInput = new BigDecimal(0);
+        curResult = new BigDecimal(0);
+        lastAct = null;
+    }
 
 
     public static void toChangeSign(){
-      /*  String s = enterField.getText().toString();
-        if(s.substring(0, 1).equals("-"))
-            enterField.setText(s.substring(1));
-        else
-            enterField.setText("-"+s);
-        trimZero();*/
         curInput=curInput.multiply(new BigDecimal(-1));
-        resultField.setText(curInput.toString());
         refreshInput();
     }
 
-    private static void trimZero1(){
-        String sign = "";
-        String s = enterField.getText().toString();
-        if(s.length()==0||s.equals("0")) {
-            enterField.setText("0");
-            return;
-        }
-
-        if(s.substring(0, 1).equals("-")){
-            sign="-";
-            s=s.substring(1);
-        }
-
-        for(int i=0; i<s.length();i++) {
-            if (s.substring(0, 1).equals("0")) {
-                s = s.substring(1);
-            } else
-                break;
-        }
-        if(s.length()==0||s.equals("0")) {
-            s = "0";
-            sign="";
-        }
-        if(s.substring(0, 1).equals("."))
-            s="0"+s;
-        enterField.setText(sign+s.toString());
-    }
 
     public static void addDot(){
-        Log.e("my", "dotPresent: "+isDotPresent);
-        Log.e("my", "dotNeed: "+isDotNeed);
         if(isDotPresent)
             return;
         isDotNeed=true;
-        Log.e("my", "dotPresent: "+isDotPresent);
-        Log.e("my", "dotNeed: "+isDotNeed);
         refreshInput();
     }
 
-    public static boolean isSizeExceed(){
-        return enterField.getText().toString().length()>9?true:false;
-    }
 
     public static void toBackSpace(){
         String s = enterField.getText().toString();
         String res = "";
         res=s.substring(0, s.length()-1);
-        if(s.length()>0) {
+        if(res.length()<1)
+            res="0";
+        if(res.length()>0) {
             enterField.setText(res);
             curInput = new BigDecimal(res);
             isDotPresent = res.contains(".");
-
         }
-      //  trimZero();
     }
 
     public static void clearEntry(){
+        isInputClean = true;
         isDotPresent=false;
         isDotNeed=false;
         curInput = new BigDecimal(0);
@@ -100,34 +79,86 @@ static {
     }
 
     public static void clear(){
+        lastAct=null;
         resultField.setText("");
         clearEntry();
     }
 
-    private static void getInput1(){
-        isDotPresent = enterField.getText().toString().contains(".");
-        curInput = new BigDecimal(enterField.getText().toString());
-    }
+
     public static void in(Integer i){
-        setInput(i);
-    }
-
-    private static void setInput(Integer i){
-        curInput = new BigDecimal(enterField.getText().toString()+i);
-        Log.e("my", "enter: "+i);
+        String s;
+        if(isNeedClean) {
+            s = i.toString();
+            lastAct=null;
+            curResult = new BigDecimal(0);
+            refreshResult();
+            isNeedClean=false;
+        }
+        else
+            s=enterField.getText().toString()+i;
+        curInput = new BigDecimal(s);
         refreshInput();
-    }
-private static void refreshInput(){
-    String s = curInput.toString();
-    if(isDotNeed&&!isDotPresent) {
-        s += '.';
-        isDotPresent=true;
-        isDotNeed=false;
+        isInputClean = false;
     }
 
-    Log.e("my", "enterField: "+curInput.toString());
-    enterField.setText(s);
+    private static void refreshInput(){
+        String s = curInput.toPlainString();
+        if(isDotNeed&&!isDotPresent) {
+            s += '.';
+            isDotPresent=true;
+            isDotNeed=false;
+        }
+        enterField.setText(s);
 }
 
+    private static void refreshResult(){
+        curResult = new BigDecimal(curResult.toPlainString());
+        resultField.setText(curResult.toPlainString());
+    }
 
+    public static void doAction(Calc.action tempAct){
+        printSign(tempAct);
+        isNeedClean=false;
+        if(lastAct==null){
+            curResult = new BigDecimal(curInput.toPlainString());
+            refreshResult();
+        }
+        if(isInputClean) {
+           lastAct=tempAct;
+        }
+        else
+        {
+            if (lastAct == action.plus) {
+                curResult = curResult.add(curInput);
+                refreshResult();
+            }
+            if (lastAct == action.min) {
+                curResult = curResult.subtract(curInput);
+                refreshResult();
+            }
+            if (tempAct == eq) {
+                isNeedClean=true;
+            }
+            lastAct = tempAct;
+            clearEntry();
+
+        }
+    }
+
+    private static void printSign(action tempAct) {
+        signField.setText(" ");
+        if(tempAct==action.plus)
+            signField.setText("+");
+        if(tempAct==action.min)
+            signField.setText("-");
+        if(tempAct==action.dev)
+            signField.setText("/");
+        if(tempAct==action.mult)
+            signField.setText("*");
+
+    }
+
+    private static void print(){
+        Log.e("my", "isNeedClean: "+isNeedClean+"  isInputClean: "+isInputClean+"  last: "+lastAct);
+    }
 }

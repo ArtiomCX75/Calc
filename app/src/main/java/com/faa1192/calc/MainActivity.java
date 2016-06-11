@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import static com.faa1192.calc.Calc.enterField;
 import static com.faa1192.calc.Calc.resultField;
+import static com.faa1192.calc.Calc.signField;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toDisableButtons();
         enterField = (TextView) findViewById(R.id.enter_field);
         resultField = (TextView) findViewById(R.id.result_field);
+        signField = (TextView) findViewById(R.id.sign_field);
     }
 
     @Override
@@ -86,8 +88,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Calc.in(3);
                 break;
             case R.id.num_min:
+                Calc.doAction(Calc.action.min);
                 break;
             case R.id.num_eq:
+                Calc.doAction(Calc.action.eq);
                 break;
             case R.id.num_0:
                 Calc.in(0);
@@ -96,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Calc.addDot();
                 break;
             case R.id.num_plus:
+                Calc.doAction(Calc.action.plus);
                 break;
 
 
@@ -166,11 +171,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ((Button)     findViewById(R.id.num_1)).setEnabled(true);
         ((Button)     findViewById(R.id.num_2)).setEnabled(true);
         ((Button)     findViewById(R.id.num_3)).setEnabled(true);
-        ((Button)     findViewById(R.id.num_min)).setEnabled(false);
-        ((Button)     findViewById(R.id.num_eq)).setEnabled(false);
+        ((Button)     findViewById(R.id.num_min)).setEnabled(true);
+        ((Button)     findViewById(R.id.num_eq)).setEnabled(true);
         ((Button)     findViewById(R.id.num_0)).setEnabled(true);;
         ((Button)     findViewById(R.id.num_dot)).setEnabled(true);
-        ((Button)     findViewById(R.id.num_plus)).setEnabled(false);
+        ((Button)     findViewById(R.id.num_plus)).setEnabled(true);
     }
 
 
