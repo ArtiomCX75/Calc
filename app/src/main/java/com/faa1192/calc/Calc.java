@@ -20,7 +20,6 @@ public class Calc {
     private static boolean isDotNeed = false;
     private static boolean isNeedClean = false;
     private static boolean isInputClean = true;
-
     private static Calc.action lastAct = null;
 
     private static BigDecimal curInput = new BigDecimal(0);
@@ -42,12 +41,10 @@ public class Calc {
         lastAct = null;
     }
 
-
     public static void toChangeSign(){
         curInput=curInput.multiply(new BigDecimal(-1));
         refreshInput();
     }
-
 
     public static void addDot(){
         if(isDotPresent)
@@ -55,7 +52,6 @@ public class Calc {
         isDotNeed=true;
         refreshInput();
     }
-
 
     public static void toBackSpace(){
         String s = enterField.getText().toString();
@@ -95,7 +91,7 @@ public class Calc {
             isNeedClean=false;
         }
         else
-            s=enterField.getText().toString()+i;
+            s = enterField.getText().toString() + i;
         curInput = new BigDecimal(s);
         refreshInput();
         isInputClean = false;
@@ -118,16 +114,8 @@ public class Calc {
 
     public static void doAction(Calc.action tempAct){
         printSign(tempAct);
-        isNeedClean=false;
-        if(lastAct==null){
-            curResult = new BigDecimal(curInput.toPlainString());
-            refreshResult();
-        }
-        if(isInputClean) {
-           lastAct=tempAct;
-        }
-        else
-        {
+        isNeedClean = false;
+        if(!isInputClean) {
             if (lastAct == action.plus) {
                 curResult = curResult.add(curInput);
                 refreshResult();
@@ -136,13 +124,25 @@ public class Calc {
                 curResult = curResult.subtract(curInput);
                 refreshResult();
             }
-            if (tempAct == eq) {
-                isNeedClean=true;
+            if (lastAct == action.eq) {
+                if (resultField.getText().toString().isEmpty()) {
+                    curResult = curInput;
+                    refreshResult();
+                }
             }
-            lastAct = tempAct;
-            clearEntry();
-
+            if (lastAct == null) {
+                String s = resultField.getText().toString();
+                if (s.isEmpty() || s.equals("0")) {
+                    curResult = curInput;
+                    refreshResult();
+                }
+            }
         }
+        if(tempAct!=eq)
+            lastAct = tempAct;
+        else
+            isNeedClean=true;
+        clearEntry();
     }
 
     private static void printSign(action tempAct) {
@@ -155,7 +155,6 @@ public class Calc {
             signField.setText("/");
         if(tempAct==action.mult)
             signField.setText("*");
-
     }
 
     private static void print(){

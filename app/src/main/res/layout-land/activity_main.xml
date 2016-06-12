@@ -15,47 +15,58 @@
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="10"
-        >
+        android:layout_weight="10">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            >
+            android:gravity="right">
 
             <TextView
-                android:padding="10dp"
+                android:padding="5dp"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right|bottom"
                 android:textSize="@dimen/abc_text_size_large_material"
                 android:background="@color/button_material_light"
-                android:id="@+id/result_field" />
+                android:id="@+id/result_field"
+                android:layout_margin="5dp" />
 
             <TextView
-                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|bottom"
+                android:textSize="@dimen/abc_text_size_large_material"
+                android:background="@color/button_material_light"
+                android:id="@+id/sign_field"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text=" " />
+
+            <TextView
+                android:padding="5dp"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:gravity="right|bottom"
                 android:textSize="@dimen/abc_text_size_large_material"
                 android:layout_height="wrap_content"
-                android:background="@color/button_material_light"
-                android:id="@+id/enter_field" />
+                android:background="@color/accent_material_dark"
+                android:id="@+id/enter_field"
+                android:layout_margin="5dp" />
 
         </LinearLayout>
 
         <GridLayout
-            android:layout_gravity="bottom"
-            android:gravity="bottom"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:columnCount="5"
             android:minWidth="@dimen/activity_horizontal_margin"
             android:minHeight="@dimen/activity_vertical_margin"
-            android:layout_margin="5dp">
+            android:layout_margin="5dp"
+            android:layout_gravity="bottom">
 
 
             <Button
@@ -234,28 +245,15 @@
                 android:id="@+id/num_min" />
 
 
-
-            <Button
-                style="@style/Button1_Style"
-                android:layout_column="4"
-                android:layout_row="4"
-                android:text="="
-                android:layout_rowSpan="2"
-                android:layout_gravity="fill_vertical"
-                android:id="@+id/num_eq" />
-
-
-
-
             <Button
                 style="@style/Button1_Style"
                 android:layout_column="0"
                 android:layout_row="5"
                 android:text="0"
                 android:elevation="0dp"
-                android:layout_gravity="fill_horizontal"
                 android:layout_columnSpan="2"
-                android:id="@+id/num_0" />
+                android:id="@+id/num_0"
+                android:layout_gravity="fill_horizontal" />
 
 
             <Button
@@ -280,6 +278,16 @@
                 android:layout_row="3"
                 android:text="1/x"
                 android:id="@+id/num_1divx" />
+
+            <Button
+                style="@style/Button1_Style"
+                android:layout_column="4"
+                android:layout_row="4"
+                android:text="="
+                android:layout_rowSpan="2"
+                android:id="@+id/num_eq"
+                android:gravity="center"
+                android:layout_gravity="fill" />
 
 
         </GridLayout>

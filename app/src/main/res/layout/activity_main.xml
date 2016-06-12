@@ -27,12 +27,11 @@
             android:textSize="@dimen/abc_text_size_large_material"
             android:background="@color/button_material_light"
             android:id="@+id/result_field"
-            android:layout_margin="1dp"
+            android:layout_margin="5dp"
             android:padding="5dp" />
 
         <TextView
-
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right|bottom"
             android:textSize="@dimen/abc_text_size_large_material"
