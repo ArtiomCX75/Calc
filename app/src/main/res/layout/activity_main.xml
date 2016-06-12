@@ -28,21 +28,23 @@
             android:layout_height="wrap_content"
             android:gravity="right|bottom"
             android:textSize="@dimen/abc_text_size_large_material"
-            android:background="@color/accent_material_dark"
+            android:background="@color/bright_foreground_inverse_material_dark"
             android:id="@+id/result_field"
             android:layout_margin="5dp"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:textColor="@color/background_floating_material_light" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right|bottom"
             android:textSize="@dimen/abc_text_size_large_material"
-            android:background="@color/button_material_light"
+            android:background="@color/bright_foreground_inverse_material_dark"
             android:id="@+id/sign_field"
             android:layout_margin="5dp"
             android:padding="5dp"
-            android:text=" " />
+            android:text=" "
+            android:textColor="@color/background_floating_material_light"/>
 
         <TextView
             android:layout_weight="1"
@@ -50,11 +52,12 @@
             android:gravity="right|bottom"
             android:textSize="@dimen/abc_text_size_large_material"
             android:layout_height="wrap_content"
-            android:background="@color/accent_material_dark"
+            android:background="@color/bright_foreground_inverse_material_dark"
             android:id="@+id/enter_field"
             android:text="0"
             android:layout_margin="5dp"
-            android:padding="5dp" />
+            android:padding="5dp"
+            android:textColor="@color/background_floating_material_light" />
 
         <GridLayout
             android:layout_gravity="center"

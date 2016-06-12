@@ -1,9 +1,11 @@
 package com.faa1192.calc;
 
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 
 import static com.faa1192.calc.Calc.action.eq;
 
@@ -49,6 +51,13 @@ public class Calc {
     public static void addDot(){
         if(isDotPresent)
             return;
+        if(isNeedClean) {
+            lastAct=null;
+            curResult = new BigDecimal(0);
+            refreshResult();
+            isNeedClean=false;
+            printMessage("");
+        }
         isDotNeed=true;
         refreshInput();
     }
@@ -130,6 +139,18 @@ public class Calc {
                 curResult = curResult.multiply(curInput);
                 refreshResult();
             }
+            if (lastAct == action.dev) {
+                try {
+                    curResult = curResult.divide(curInput, MathContext.DECIMAL64);
+                }
+                catch (ArithmeticException e){
+                    clear();
+                    printMessage("Division by zero");
+                    isNeedClean=true;
+                    return;
+                }
+                refreshResult();
+            }
             if (lastAct == action.eq) {
                 if (resultField.getText().toString().isEmpty()) {
                     curResult = curInput;
@@ -173,4 +194,44 @@ public class Calc {
     private static void print(){
         Log.e("my", "isNeedClean: "+isNeedClean+"  isInputClean: "+isInputClean+"  last: "+lastAct);
     }
+
+
+    public static Bundle getBundle(){
+        Bundle b = new Bundle();
+        b.putBoolean("isDotPresent", isDotPresent);
+        b.putBoolean("isDotNeed", isDotNeed);
+        b.putBoolean("isNeedClean", isNeedClean);
+        b.putBoolean("isInputClean", isInputClean);
+        if(lastAct!=null)
+            b.putString("lastAct", lastAct.name());
+        else
+            b.putString("lastAct", null);
+        b.putString("curInput", curInput.toPlainString());
+        b.putString("curResult", curResult.toPlainString());
+        Log.e("my", "get: "+b.toString());
+        return b;
+    }
+
+    public static void setBundle(Bundle b){
+        Log.e("my", "set: "+b.toString());
+        isDotPresent = b.getBoolean("isDotPresent", isDotPresent);
+        isDotNeed = b.getBoolean("isDotNeed", isDotNeed);
+        isNeedClean = b.getBoolean("isNeedClean", isNeedClean);
+        isInputClean = b.getBoolean("isInputClean", isInputClean);
+        if(b.getString("lastAct")!=null)
+            lastAct = action.valueOf(b.getString("lastAct"));
+        else
+            lastAct=null;
+        curInput = new BigDecimal(b.getString("curInput"));
+        curResult = new BigDecimal(b.getString("curResult"));
+        refreshResult();
+        printSign(lastAct);
+        refreshInput();
+        if((isDotPresent==true)&&!(enterField.getText().toString().contains("."))){
+            isDotPresent=false;
+            addDot();
+        }
+    }
+
+
 }

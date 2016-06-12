@@ -23,7 +23,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         enterField = (TextView) findViewById(R.id.enter_field);
         resultField = (TextView) findViewById(R.id.result_field);
         signField = (TextView) findViewById(R.id.sign_field);
+
     }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState!=null) {
+            Calc.setBundle(savedInstanceState.getBundle("state"));
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBundle("state", Calc.getBundle());
+    }
+
+
 
     @Override
     public void onClick(View view) {
@@ -62,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Calc.in(9);
                 break;
             case R.id.num_div:
+                Calc.doAction(Calc.action.dev);
                 break;
             case R.id.num_proc:
                 break;
@@ -162,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ((Button)     findViewById(R.id.num_7)).setEnabled(true);
         ((Button)     findViewById(R.id.num_8)).setEnabled(true);
         ((Button)     findViewById(R.id.num_9)).setEnabled(true);
-        ((Button)     findViewById(R.id.num_div)).setEnabled(false);
+        ((Button)     findViewById(R.id.num_div)).setEnabled(true);
         ((Button)     findViewById(R.id.num_proc)).setEnabled(false);
         ((Button)     findViewById(R.id.num_4)).setEnabled(true);
         ((Button)      findViewById(R.id.num_5)).setEnabled(true);
