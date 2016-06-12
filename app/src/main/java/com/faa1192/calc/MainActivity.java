@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Calc.in(6);
                 break;
             case R.id.num_mult:
+                Calc.doAction(Calc.action.mult);
                 break;
             case R.id.num_1divx:
                 break;
@@ -166,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ((Button)     findViewById(R.id.num_4)).setEnabled(true);
         ((Button)      findViewById(R.id.num_5)).setEnabled(true);
         ((Button)      findViewById(R.id.num_6)).setEnabled(true);
-        ((Button)     findViewById(R.id.num_mult)).setEnabled(false);
+        ((Button)     findViewById(R.id.num_mult)).setEnabled(true);
         ((Button)     findViewById(R.id.num_1divx)).setEnabled(false);
         ((Button)     findViewById(R.id.num_1)).setEnabled(true);
         ((Button)     findViewById(R.id.num_2)).setEnabled(true);

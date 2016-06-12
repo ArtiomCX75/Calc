@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bright_foreground_material_light">
 
     <LinearLayout
 
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_weight="1"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -31,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="right|bottom"
                 android:textSize="@dimen/abc_text_size_large_material"
-                android:background="@color/button_material_light"
+                android:background="@color/accent_material_dark"
                 android:id="@+id/result_field"
                 android:layout_margin="5dp" />
 

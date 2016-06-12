@@ -77,6 +77,7 @@ public class Calc {
     public static void clear(){
         lastAct=null;
         resultField.setText("");
+        printMessage("");
         clearEntry();
     }
 
@@ -89,6 +90,7 @@ public class Calc {
             curResult = new BigDecimal(0);
             refreshResult();
             isNeedClean=false;
+            printMessage("");
         }
         else
             s = enterField.getText().toString() + i;
@@ -124,6 +126,10 @@ public class Calc {
                 curResult = curResult.subtract(curInput);
                 refreshResult();
             }
+            if (lastAct == action.mult) {
+                curResult = curResult.multiply(curInput);
+                refreshResult();
+            }
             if (lastAct == action.eq) {
                 if (resultField.getText().toString().isEmpty()) {
                     curResult = curInput;
@@ -146,7 +152,9 @@ public class Calc {
     }
 
     private static void printSign(action tempAct) {
-        signField.setText(" ");
+        signField.setText("");
+        if(tempAct==action.eq)
+            signField.setText("=");
         if(tempAct==action.plus)
             signField.setText("+");
         if(tempAct==action.min)
@@ -156,6 +164,11 @@ public class Calc {
         if(tempAct==action.mult)
             signField.setText("*");
     }
+
+    private static void printMessage(String s){
+        signField.setText(s);
+    }
+
 
     private static void print(){
         Log.e("my", "isNeedClean: "+isNeedClean+"  isInputClean: "+isInputClean+"  last: "+lastAct);
