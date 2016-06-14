@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import static com.faa1192.calc.Calc.enterField;
+import static com.faa1192.calc.Calc.memoryField;
 import static com.faa1192.calc.Calc.resultField;
 import static com.faa1192.calc.Calc.signField;
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         enterField = (TextView) findViewById(R.id.enter_field);
         resultField = (TextView) findViewById(R.id.result_field);
         signField = (TextView) findViewById(R.id.sign_field);
+        memoryField = (TextView) findViewById(R.id.memory_field);
 
     }
 
@@ -46,10 +48,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.num_mc:
+                Calc.doOperation(Calc.operations.mc);
                 break;
             case R.id.num_mr:
+                Calc.doOperation(Calc.operations.mr);
                 break;
             case R.id.num_ms:
+                Calc.doOperation(Calc.operations.ms);
                 break;
             case R.id.num_mplus:
                 break;
@@ -167,9 +172,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void toDisableButtons() {
-        ((Button) findViewById(R.id.num_mc)).setEnabled(false);
-        ((Button) findViewById(R.id.num_mr)).setEnabled(false);
-        ((Button) findViewById(R.id.num_ms)).setEnabled(false);
+        ((Button) findViewById(R.id.num_mc)).setEnabled(true);
+        ((Button) findViewById(R.id.num_mr)).setEnabled(true);
+        ((Button) findViewById(R.id.num_ms)).setEnabled(true);
         ((Button) findViewById(R.id.num_mplus)).setEnabled(false);
         ((Button)  findViewById(R.id.num_mmin)).setEnabled(false);
         ((Button)   findViewById(R.id.num_back)).setEnabled(true);

@@ -27,6 +27,18 @@
             android:gravity="right">
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right|bottom"
+                android:textSize="@dimen/abc_text_size_large_material"
+                android:background="@color/bright_foreground_inverse_material_dark"
+                android:id="@+id/memory_field"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                android:text=" "
+                android:textColor="@color/background_floating_material_light"/>
+
+            <TextView
                 android:padding="5dp"
                 android:layout_weight="1"
                 android:layout_width="match_parent"

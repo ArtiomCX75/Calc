@@ -17,6 +17,7 @@ public class Calc {
     public static TextView enterField;
     public static TextView resultField;
     public static TextView signField;
+    public static TextView memoryField;
 
     private static boolean isDotPresent = false;
     private static boolean isDotNeed = false;
@@ -26,12 +27,15 @@ public class Calc {
 
     private static BigDecimal curInput = new BigDecimal(0);
     private static BigDecimal curResult = new BigDecimal(0);
+    private static BigDecimal curMemory = new BigDecimal(0);
+
+
 
     enum action {
         eq, plus, min, mult, dev, proc
     }
 
-    enum functions {
+    enum operations {
         mc, mr, ms, mplus, mmin, root, divx
     }
 
@@ -190,6 +194,12 @@ public class Calc {
         signField.setText(s);
     }
 
+    private static void printMemoryStatus(){
+        if(!curMemory.toString().equals("0")&&!curMemory.toString().equals("0.0"))
+            memoryField.setText("M");
+        else
+            memoryField.setText(" ");
+    }
 
     private static void print(){
         Log.e("my", "isNeedClean: "+isNeedClean+"  isInputClean: "+isInputClean+"  last: "+lastAct);
@@ -208,6 +218,7 @@ public class Calc {
             b.putString("lastAct", null);
         b.putString("curInput", curInput.toPlainString());
         b.putString("curResult", curResult.toPlainString());
+        b.putString("curMemory", curMemory.toPlainString());
         Log.e("my", "get: "+b.toString());
         return b;
     }
@@ -224,6 +235,7 @@ public class Calc {
             lastAct=null;
         curInput = new BigDecimal(b.getString("curInput"));
         curResult = new BigDecimal(b.getString("curResult"));
+        curMemory = new BigDecimal(b.getString("curMemory"));
         refreshResult();
         printSign(lastAct);
         refreshInput();
@@ -231,7 +243,32 @@ public class Calc {
             isDotPresent=false;
             addDot();
         }
+        printMemoryStatus();
     }
 
-
+    public static void doOperation(Calc.operations op){
+        if(op==operations.ms){
+            String s = resultField.getText().toString();
+            if(s.length()>0&&!s.equals("0")&&!s.equals("0.0"))
+                curMemory = new BigDecimal(s);
+            else{
+                s = enterField.getText().toString();
+                if(s.length()>0)
+                    curMemory = new BigDecimal(s);
+            }
+            printMemoryStatus();
+            return;
+        }
+        if(op==operations.mc){
+            curMemory = new BigDecimal(0);
+            printMemoryStatus();
+            return;
+        }
+        if(op==operations.mr){
+            curInput = new BigDecimal(curMemory.toPlainString());
+            refreshInput();
+            printMemoryStatus();
+            return;
+        }
+    }
 }
