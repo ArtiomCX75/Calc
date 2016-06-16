@@ -2,11 +2,12 @@ package com.faa1192.calc;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import static com.faa1192.calc.Calc.enterField;
+import static com.faa1192.calc.Calc.inputField;
 import static com.faa1192.calc.Calc.memoryField;
 import static com.faa1192.calc.Calc.resultField;
 import static com.faa1192.calc.Calc.signField;
@@ -14,14 +15,13 @@ import static com.faa1192.calc.Calc.signField;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toSetOnClickListener();
         toDisableButtons();
-        enterField = (TextView) findViewById(R.id.enter_field);
+        inputField = (TextView) findViewById(R.id.enter_field);
         resultField = (TextView) findViewById(R.id.result_field);
         signField = (TextView) findViewById(R.id.sign_field);
         memoryField = (TextView) findViewById(R.id.memory_field);
@@ -42,12 +42,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         outState.putBundle("state", Calc.getBundle());
     }
 
-
-
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.num_mc:
+                Log.e("my", "mc");
                 Calc.doOperation(Calc.operations.mc);
                 break;
             case R.id.num_mr:
@@ -57,8 +56,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Calc.doOperation(Calc.operations.ms);
                 break;
             case R.id.num_mplus:
+                Calc.doOperation(Calc.operations.mplus);
                 break;
             case R.id.num_mmin:
+                Calc.doOperation(Calc.operations.mmin);
                 break;
             case R.id.num_back:
                 Calc.toBackSpace();
@@ -164,19 +165,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.num_plus).setOnClickListener(this);
     }
 
-
-
-
-
-
-
-
     public void toDisableButtons() {
         ((Button) findViewById(R.id.num_mc)).setEnabled(true);
         ((Button) findViewById(R.id.num_mr)).setEnabled(true);
         ((Button) findViewById(R.id.num_ms)).setEnabled(true);
-        ((Button) findViewById(R.id.num_mplus)).setEnabled(false);
-        ((Button)  findViewById(R.id.num_mmin)).setEnabled(false);
+        ((Button) findViewById(R.id.num_mplus)).setEnabled(true);
+        ((Button)  findViewById(R.id.num_mmin)).setEnabled(true);
         ((Button)   findViewById(R.id.num_back)).setEnabled(true);
         ((Button)    findViewById(R.id.num_ce)).setEnabled(true);
         ((Button)    findViewById(R.id.num_c)).setEnabled(true);
@@ -201,7 +195,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ((Button)     findViewById(R.id.num_dot)).setEnabled(true);
         ((Button)     findViewById(R.id.num_plus)).setEnabled(true);
     }
-
-
 
 }

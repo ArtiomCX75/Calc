@@ -14,7 +14,7 @@ import static com.faa1192.calc.Calc.action.eq;
  */
 
 public class Calc {
-    public static TextView enterField;
+    public static TextView inputField;
     public static TextView resultField;
     public static TextView signField;
     public static TextView memoryField;
@@ -44,6 +44,7 @@ public class Calc {
         isDotPresent=false;
         curInput = new BigDecimal(0);
         curResult = new BigDecimal(0);
+        curMemory = new BigDecimal(0);
         lastAct = null;
     }
 
@@ -67,13 +68,13 @@ public class Calc {
     }
 
     public static void toBackSpace(){
-        String s = enterField.getText().toString();
+        String s = inputField.getText().toString();
         String res = "";
         res=s.substring(0, s.length()-1);
         if(res.length()<1)
             res="0";
         if(res.length()>0) {
-            enterField.setText(res);
+            inputField.setText(res);
             curInput = new BigDecimal(res);
             isDotPresent = res.contains(".");
         }
@@ -106,7 +107,7 @@ public class Calc {
             printMessage("");
         }
         else
-            s = enterField.getText().toString() + i;
+            s = inputField.getText().toString() + i;
         curInput = new BigDecimal(s);
         refreshInput();
         isInputClean = false;
@@ -119,7 +120,7 @@ public class Calc {
             isDotPresent=true;
             isDotNeed=false;
         }
-        enterField.setText(s);
+        inputField.setText(s);
 }
 
     private static void refreshResult(){
@@ -239,7 +240,7 @@ public class Calc {
         refreshResult();
         printSign(lastAct);
         refreshInput();
-        if((isDotPresent==true)&&!(enterField.getText().toString().contains("."))){
+        if((isDotPresent==true)&&!(inputField.getText().toString().contains("."))){
             isDotPresent=false;
             addDot();
         }
@@ -252,7 +253,7 @@ public class Calc {
             if(s.length()>0&&!s.equals("0")&&!s.equals("0.0"))
                 curMemory = new BigDecimal(s);
             else{
-                s = enterField.getText().toString();
+                s = inputField.getText().toString();
                 if(s.length()>0)
                     curMemory = new BigDecimal(s);
             }
@@ -267,6 +268,30 @@ public class Calc {
         if(op==operations.mr){
             curInput = new BigDecimal(curMemory.toPlainString());
             refreshInput();
+            printMemoryStatus();
+            return;
+        }
+        if(op==operations.mplus){
+            String s = resultField.getText().toString();
+            if(s.length()>0&&!s.equals("0")&&!s.equals("0.0"))
+            curMemory = curMemory.add(curResult);
+            else{
+                s = inputField.getText().toString();
+                if(s.length()>0)
+                    curMemory = curMemory.add(curInput);
+            }
+            printMemoryStatus();
+            return;
+        }
+        if(op==operations.mmin){
+            String s = resultField.getText().toString();
+            if(s.length()>0&&!s.equals("0")&&!s.equals("0.0"))
+                curMemory = curMemory.subtract(curResult);
+            else{
+                s = inputField.getText().toString();
+                if(s.length()>0)
+                    curMemory = curMemory.subtract(curInput);
+            }
             printMemoryStatus();
             return;
         }
